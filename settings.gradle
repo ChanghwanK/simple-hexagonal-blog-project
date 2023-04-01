@@ -1,0 +1,12 @@
+rootProject.name = 'simple-hexagonal-blog-springboot-project'
+include 'adapters'
+include 'domain'
+include 'adapters:in'
+
+include 'adapters:out'
+
+include 'adapters:in:web'
+
+include 'adapters:out:persistence-database'
+
+
