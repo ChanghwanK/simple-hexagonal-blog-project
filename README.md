@@ -24,6 +24,7 @@ Hexagonal Architecture를 숙련도를 높이기 위해 진행하는 Simple Blog
   - 비즈니스 로직을 담당하는 `Application Layer`가 독립적인 형태로 존재하고 외부 의존성들은 언제든지 교체 가능해야 함
   - 따라서 DIP 설계 원칙을 적용하고 세부구현체들은 언제든지 교체 가능하도록 멀티 모듈로 구축한다.
 
+
 ### 객체간 책임과 역할 명백히 하기
 
 - Hexagonal은 MVC 패턴과 같이 아직 표준이라고 불릴만한 Pattern이 존재하지 않음,  Hexagonal의 개념이 등장한지는 어느정도 시간이 흘렀지만 이렇게 Hot Topic으로 떠오른 것은 얼마되지 않았기 때문 -> 따라서 나만의 설계 Practice 적립을 진행
@@ -37,3 +38,7 @@ Hexagonal Architecture를 숙련도를 높이기 위해 진행하는 Simple Blog
 4. @Service 라는 애노테이션 대신 다른 애노테이션 사용
 
 
+
+### 고민
+1. Command 멤버는 도메인 객체로 하는 것이 좋을까 각 변수들로 구성하는 것이 좋을까?
+   - command는  

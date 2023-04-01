@@ -1,19 +1,16 @@
 package com.simple.blog.port.in;
 
+import com.simple.blog.post.Post.CoreData;
+
 public interface PostSaveUseCase {
 
     void command(Command command);
 
-    public class Command {
-        private String name;
+    class Command {
+        private final CoreData metaInfo;
 
-        public Command(String name) {
-            this.name = name;
-        }
+        public Command(final CoreData metaInfo) { this.metaInfo = metaInfo;}
 
-        public String getName() {
-            return name;
-        }
+        public CoreData getCoreData() { return metaInfo;}
     }
-
 }

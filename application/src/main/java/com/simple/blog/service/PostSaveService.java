@@ -1,7 +1,8 @@
 package com.simple.blog.service;
 
 import com.simple.blog.port.in.PostSaveUseCase;
-import com.simple.blog.port.out.PostSavePort;
+import com.simple.blog.port.out.PostPersistencePort;
+import com.simple.blog.post.Post;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -9,14 +10,16 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class PostSaveService implements PostSaveUseCase {
 
-    private final PostSavePort postSavePort;
+    private final PostPersistencePort persistencePort;
 
-    public PostSaveService(PostSavePort postSaveAdapter) {
-        this.postSavePort = postSaveAdapter;
+    public PostSaveService(PostPersistencePort persistencePort) {
+        this.persistencePort = persistencePort;
     }
 
     @Override
-    public void command(Command command) {
-        System.out.println("Command");
+    public void command(PostSaveUseCase.Command command) {
+        Post post = Post.initPostWithCoreData(command.getCoreData());
+        String shareLink = post.createShareLink();
+        persistencePort.saveWithShareLink(post, shareLink);
     }
 }

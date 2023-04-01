@@ -9,4 +9,5 @@ include 'adapters:in:web'
 
 include 'adapters:out:persistence-database'
 include 'application'
+include 'common'
 
