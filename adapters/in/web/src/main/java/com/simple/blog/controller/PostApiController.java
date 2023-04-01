@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class PostApiController {
-    private final PostSaveUseCase postSaveUseCase;
 
+    private final PostSaveUseCase postSaveUseCase;
 
     public PostApiController(final PostSaveUseCase postSaveUseCase) {
         this.postSaveUseCase = postSaveUseCase;
