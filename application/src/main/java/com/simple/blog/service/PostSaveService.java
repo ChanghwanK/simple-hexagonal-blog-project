@@ -18,8 +18,11 @@ public class PostSaveService implements PostSaveUseCase {
 
     @Override
     public void command(PostSaveUseCase.Command command) {
-        Post post = Post.initPostWithCoreData(command.getCoreData());
-        String shareLink = post.createShareLink();
-        persistencePort.saveWithShareLink(post, shareLink);
+        persistencePort.saveWithShareLink(
+            Post.initPostWithCoreData(
+                command.getPostMetaInfo(),
+                command.getContent(),
+                command.getPassword())
+        );
     }
 }

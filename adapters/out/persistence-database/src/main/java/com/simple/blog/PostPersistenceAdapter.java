@@ -18,7 +18,7 @@ public class PostPersistenceAdapter implements PostPersistencePort {
     }
 
     @Override
-    public void saveWithShareLink(Post post, String shareLink) {
-        postRepository.save(postMapper.mapToJpaEntity(post, shareLink));
+    public void saveWithShareLink(Post post) {
+        postRepository.save(postMapper.mapToJpaEntity(post));
     }
 }

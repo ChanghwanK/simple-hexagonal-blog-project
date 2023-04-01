@@ -2,7 +2,9 @@ package com.simple.blog;
 
 import com.simple.blog.dto.PostSaveRequestDto;
 import com.simple.blog.port.in.PostSaveUseCase;
-import com.simple.blog.post.Post.CoreData;
+import com.simple.blog.post.Content;
+import com.simple.blog.post.Password;
+import com.simple.blog.post.PostMetaInfo;
 import com.simple.blog.response.CommonResponse;
 import javax.validation.Valid;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,12 +24,12 @@ public class PostApiController {
     public CommonResponse save(
             @RequestBody @Valid PostSaveRequestDto dto) {
 
-        postSaveUseCase.command(new PostSaveUseCase.Command(
-                new CoreData(
-                    dto.getNickName(),
-                    dto.getTitle(),
-                    dto.getContent(),
-                    dto.getPassword())));
+        postSaveUseCase.command(
+            new PostSaveUseCase.Command(
+                PostMetaInfo.of(dto.getNickName(), dto.getTitle()),
+                Content.of(dto.getContent()),
+                Password.of(dto.getPassword()))
+        );
 
         return CommonResponse.SUCCESS;
     }
