@@ -1,8 +1,6 @@
 package com.simple.blog.entity;
 
 
-import com.simple.blog.post.Post;
-import com.simple.blog.post.PostMetaInfo;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.Index;
 import javax.persistence.Table;
 import lombok.Builder;
+import org.springframework.util.ObjectUtils;
 
 @Entity
 @Table(
@@ -41,7 +40,7 @@ public class PostJpaEntity extends BaseEntity {
     protected PostJpaEntity() {}
 
     @Builder
-    private PostJpaEntity(
+    public PostJpaEntity(
             final String nickName,
             final String title,
             final String content,
@@ -57,18 +56,6 @@ public class PostJpaEntity extends BaseEntity {
         this.shareLink = shareLink;
     }
 
-    public static PostJpaEntity of(Post post) {
-        PostMetaInfo metaInfo = post.getMetaInfo();
-        return PostJpaEntity.builder()
-            .nickName(post.getMetaInfo().getNickName())
-            .title(metaInfo.getTitle())
-            .content(post.getContent().getValue())
-            .password(post.getPassword().getValue())
-            .viewCount(post.getViewCount().getValue())
-            .shareLink(post.getShareLink().getValue())
-            .build();
-    }
-
     public Long getId() {return id;}
 
     public String getNickName() {return nickName;}
@@ -82,4 +69,20 @@ public class PostJpaEntity extends BaseEntity {
     public String getShareLink() {return shareLink;}
 
     public Integer getViewCount() {return viewCount;}
+
+    private void constructorParameterValidation(
+            final String name,
+            final String title,
+            final String content,
+            final String password,
+            final Integer viewCount,
+            final String shareLink) {
+        if (ObjectUtils.isEmpty(name) ||
+            ObjectUtils.isEmpty(title) ||
+            ObjectUtils.isEmpty(content) ||
+            ObjectUtils.isEmpty(password) ||
+            ObjectUtils.isEmpty(viewCount) ||
+            ObjectUtils.isEmpty(shareLink))
+            throw new IllegalArgumentException("모든 매개변수는 null 또는 빈 문자열(empty string)이 아니어야 합니다.");
+    }
 }
