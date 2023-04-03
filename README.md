@@ -20,7 +20,7 @@ Hexagonal Architecture를 숙련도를 높이기 위해 진행하는 Simple Blog
 
 ###  Hexagonal Architecture의 철학을 보다 잘 적용하기 위해 각 레이어들은 배포 가능한 독립적인 모듈로 구축하기
 
-- **Hexagonal의 핵심은** `확장성` 
+- **Hexagonal의 핵심은** `책임` X `경계` X `분리` -> `확장성` 
   - 비즈니스 로직을 담당하는 `Application Layer`가 독립적인 형태로 존재하고 외부 의존성들은 언제든지 교체 가능해야 함
   - 따라서 DIP 설계 원칙을 적용하고 세부구현체들은 언제든지 교체 가능하도록 멀티 모듈로 구축한다.
 
